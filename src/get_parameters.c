@@ -1,6 +1,6 @@
-#include<cfd_hs2017.h>
+#include"cfd_hs2017.h"
 /*-------------------------XXXXXXXXXXXXXxxxxxxxxXXXXXXXXXXXX-------------------------------//
-|                    FUNCTION : TAKE INPUT PARAMETERS DURING RUN TIME                      | 
+|                    FUNCTION : TAKE INPUT PARAMETERS DURING RUN TIME                      |
 // ---------------------------XXXXXXXXXXXXXXXXXXXXXXXXX------------------------------------*/
 void get_parameters(parameters* input){
   printf("enter height : " );
@@ -19,8 +19,8 @@ void get_parameters(parameters* input){
   printf("enter fluid velocity: " );
   scanf("%lf",&input->u_f);
 
-  do { 
-  printf("please ensure that epsilon is not 1 \n"); 
+  do {
+  printf("please ensure that epsilon is not 1 \n");
   printf("enter epsilon :" );
   scanf("%lf",&input->epsilon);
   } while ( input->epsilon == 1 );
@@ -59,7 +59,7 @@ void get_parameters(parameters* input){
   */
   do {
     printf("enter the (MAX)number of cells: " );
-    scanf("%d", &input->N_max );  
+    scanf("%d", &input->N_max );
     /*printf("enter the number of cells:" );
     scanf("%d", &input->N );*/
     printf("enter the time step, del_t: " );
@@ -72,22 +72,22 @@ void get_parameters(parameters* input){
 
 
 /*-------------------------XXXXXXXXXXXXXxxxxxxxxXXXXXXXXXXXX-------------------------------//
-|                        FUNCTION : READ PARAMETERS FROM FILE                              |  
+|                        FUNCTION : READ PARAMETERS FROM FILE                              |
 // ---------------------------XXXXXXXXXXXXXXXXXXXXXXXXX------------------------------------*/
 
 int read_parameters(parameters* ip){
   int count;
   FILE* fp = fopen("parameters.txt","r");
   if (fp!=NULL){
-    count= fscanf(fp, "H=%lf d=%lf t_charge=%lf t_disch=%lf t_idle=%lf ti=%f T_bcl=%f T_bcr=%f epsilon=%lf u_f=%lf rho_f=%lf Cp_f=%lf k_f=%lf rho_s=%lf C_s=%lf k_s=%lf h_v=%lf",  
+    count= fscanf(fp, "H=%lf d=%lf t_charge=%lf t_disch=%lf t_idle=%lf ti=%f T_bcl=%f T_bcr=%f epsilon=%lf u_f=%lf rho_f=%lf Cp_f=%lf k_f=%lf rho_s=%lf C_s=%lf k_s=%lf h_v=%lf",
     &ip->H, &ip->d, &ip->t_charge, &ip->t_disch, &ip->t_idle, &ip->ti, &ip->T_bcl, &ip->T_bcr, &ip->epsilon, &ip-> u_f, &ip-> rho_f, &ip-> Cp_f, &ip-> k_f, &ip-> rho_s, &ip-> C_s, &ip-> k_s, &ip-> h_v);
     if (fclose(fp)!=0){
       printf("error closing parameter.solver after read\n");
       return 0;
-    }   
+    }
     do {
       printf("enter the (MAX)number of cells: " );
-      scanf("%d", &ip->N_max );  
+      scanf("%d", &ip->N_max );
       printf("enter the time step, del_t: " );
       scanf("%f", &ip->del_t );
      } while (check_stability(ip) !=1);
@@ -101,12 +101,12 @@ int read_parameters(parameters* ip){
 
 
 /*-------------------------XXXXXXXXXXXXXxxxxxxxxXXXXXXXXXXXX-------------------------------//
-|                        FUNCTION : CHECK STABILITY OF PARAMETERS                           |  
+|                        FUNCTION : CHECK STABILITY OF PARAMETERS                           |
 // ---------------------------XXXXXXXXXXXXXXXXXXXXXXXXX------------------------------------*/
 int check_stability(parameters* ip){
   double upper =1;
   double lower, stab_val,stab_val_s;
-  double DEL_T = ip->del_t; 
+  double DEL_T = ip->del_t;
   double alpha_s = ip->k_s / ( (1 - ip->epsilon)*(ip->rho_s)*(ip->C_s) ); // INSERT CLAUSE TO MAKE IT IMPOSSIBLE TO GET division by 0
   double alpha_f = ip->k_f / ( (ip->rho_f)*(ip->epsilon)*(ip->Cp_f) );
   double dx = ip->H/ip->N_max;
@@ -121,4 +121,3 @@ int check_stability(parameters* ip){
 return 0;
 }
 // ---------------------------XXXXXXXXXXXXXXXXXXXXXXXXX------------------------------------//
-

@@ -1,9 +1,9 @@
 /*LINEAR SYSTEM SOLVER: NAIVE LU DECOMPOSITION*/
-#include<cfd_hs2017.h>
+#include"cfd_hs2017.h"
 
 /* 		// driver section //
 int main() {
-	double A[2][2] = {{1234,5678},{4321,8765}};		
+	double A[2][2] = {{1234,5678},{4321,8765}};
 	double b[2][1] = {{69},{6969}};
 	double x[2] = { };
 	LUSolver(A, b, x);
@@ -12,7 +12,7 @@ int main() {
 */
 
 void LUSolver(double A[][2], double b[][1], double x[2]){
-double U[2][2], L[2][2];	
+double U[2][2], L[2][2];
     int i,j,k = 0;
    	double y1, y2, x1, x2;
 
@@ -36,14 +36,14 @@ double U[2][2], L[2][2];
                 U[i][j] = 1;
             }
 			else {
-                U[i][j] = A[i][j] / L[i][i];            
+                U[i][j] = A[i][j] / L[i][i];
 				for (k = 0; k < i; k++) {
                     U[i][j] = U[i][j] - ((L[i][k] * U[k][j]) / L[i][i]);
                 }
             }
         }
     }
-	// back substitution							
+	// back substitution
 		y1 = b[0][0]/L[0][0];
 		y2 = (b[1][0]-L[1][0]*y1)/L[1][1];
 		double Y[2][1] = {{y1},{y2}};

@@ -1,9 +1,9 @@
 // COMPILE WITH function.c & gauss_elim.c//
 /*------------------------------------*/
-#include<cfd_hs2017.h>
+#include"cfd_hs2017.h"
 
 int main(){
-	
+
 	char path1[] = "results";
 	char path2[] = "matlab";
 	mkdir_p(path1);
@@ -15,14 +15,14 @@ int main(){
 		"or \n PRESS 0 TO ENTER PARAMETERS AT RUNTIME ");
 		scanf("%d",&param_choice);
 	} while(param_choice!=1 && param_choice!=0 );
-	
+
 		if (param_choice==1){
-			read_parameters(&ip);							//read simulation parameters from file	
+			read_parameters(&ip);							//read simulation parameters from file
 		}
-		else if (param_choice==0){			
-			get_parameters(&ip);							//call for simulation parameters	
+		else if (param_choice==0){
+			get_parameters(&ip);							//call for simulation parameters
 		}
-			
+
 
   printf("enter the total number of cycles: ");
   scanf("%d",&ip.n_cycle);

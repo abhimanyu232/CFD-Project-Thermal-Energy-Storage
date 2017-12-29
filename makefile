@@ -1,10 +1,22 @@
 CC=gcc
-CFLAGS= -lm -I.
-DEPS = cfd_hs2017.h
-OBJ = main.o get_parameters.o solver.o mkdir_p.o linear_solver.o write_data.o ovs.o
+EXE=run_solver
+SRC_DIR=src
+SRC=$(wildcard $(SRC_DIR)/*.c)
+OBJ_DIR=intermediate
+OBJ=$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+CPPFLAGS += -Iinclude
+CFLAGS +=
+LDLIBS += -lm
+.PHONY: all clean
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+all: $(EXE)
 
-run_sol: $(OBJ)
-	gcc -o $@ $^ $(CFLAGS)
+$(EXE): $(OBJ)
+		$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+		$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+clean:
+		$(RM) $(OBJ)
+		rm -f $(EXE)

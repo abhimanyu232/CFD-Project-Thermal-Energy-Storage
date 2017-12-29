@@ -1,4 +1,4 @@
-#include<cfd_hs2017.h>
+#include"cfd_hs2017.h"
 
 
 /*-------------------------XXXXXXXXXXXXXxxxxxxxxXXXXXXXXXXXX-------------------------------//
@@ -13,11 +13,11 @@
       if (fclose(fp1) != 0){
         printf("ERROR CLOSING FILE TES_State DURING INIT\n" );
         exit(1);// ERROR HANDLE
-      }      
-    } else printf("cant open file TES_State.dat\n");  
+      }
+    } else printf("cant open file TES_State.dat\n");
     // conditional statement checking for file storage OPTION : INDIVIDUAL or CONDENSED //
     do {
-      printf("Multiple files or one condensed dat file.? 1 for Multiple and 0 for condensed\n");  
+      printf("Multiple files or one condensed dat file.? 1 for Multiple and 0 for condensed\n");
       scanf("%d",file_choice);
     } while ( (*file_choice)!=0 && (*file_choice)!=1);
     if ((*file_choice)==0){       // FOR A CONDENSED TEMP.DAT INITIALISATION // OTHER BRANCH IN WRITE2FILE
@@ -47,7 +47,7 @@
       fp = fopen(temp,"w");
       if (fp!=NULL){
         fprintf(fp,"TITLE = \" cycle= %d, T_step=%d \" \nVARIABLES = \"Position\",\"Solid Temp\",\"Liquid Temp\" \n", cycle, time_step);
-      }  
+      }
     }
     else if (file_choice==0){
       fp = fopen("results/temp.dat","a");
