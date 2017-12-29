@@ -1,0 +1,1 @@
+H=5.968310 d=8.0 t_charge=21600.0 t_disch=21600.0 t_idle=21600.0 ti=293 T_bcl=873 T_bcr=293 epsilon=0.4 u_f=0.000271 rho_f=1835.6 Cp_f=1511.8 k_f=0.52 rho_s=2600 C_s=900 k_s=2 h_v=448.587788
