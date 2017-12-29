@@ -20,3 +20,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 clean:
 		$(RM) $(OBJ)
 		rm -f $(EXE)
+
+clean_all:
+		$(RM) $(OBJ)
+		rm -f $(EXE)		
+		rm -R results
